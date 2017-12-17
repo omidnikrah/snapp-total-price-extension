@@ -1,0 +1,58 @@
+@import 'fonts.css';
+body{
+	min-width: 300px;
+	min-height: 250px;
+	text-align: center;
+	direction: rtl;
+}
+*{
+	font-family: "IRANSans";
+}
+h1{
+	color: #00adb5;
+	font-size: 20px;
+	padding: 20px 0;
+}
+p{
+	color: #00adb5;
+	font-size: 14px;
+}
+#calculate{
+	width: calc(100% - 20px);
+	padding: 10px 15px;
+	text-align: center;
+	color: #fff;
+	background-color: #303644;
+	border: 0;
+	border-radius: 3px;
+	outline: 0;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+span#total{
+	font-size: 30px;
+    font-weight: bold;
+    display: none;
+	margin-top: 10px;
+	color: #ff4040;
+	position: relative;
+
+}
+span#total::after{
+	content: 'تومان';
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	font-size: 15px;
+
+}
+#loading{
+	display: none;
+	font-size: 16px;
+	color: #00adb5;
+}

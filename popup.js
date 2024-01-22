@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const totalElem = document.getElementById("total");
 	const descriptionElem = document.getElementById("description");
 	try {
-		const key = "user";
+		const key = "accessToken";
+
 
 		const tabs = await chrome.tabs.query({
 			active: true,
@@ -21,9 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 			code: `localStorage['${key}']`
 		});
 
-		await chrome.storage.local.set({
-			[key]: fromPageLocalStore[0]
-		});
+		const accessToken = fromPageLocalStore[0];
+
 		calculateElem.addEventListener('click', () => {
 			calculateElem.disabled = true;
 			calculateElem.style.cursor = "default";
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			chrome.storage.local.get('user', ({ user }) => {
 
 				(async () => {
-					const token = JSON.parse(user).token;
+					const token = `Bearer ${accessToken}`;
 					const headers = new Headers();
 					const url = 'https://web-api.snapp.ir/api/v1/ride/history';
 					const query = '?page=';

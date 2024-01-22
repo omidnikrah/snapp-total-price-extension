@@ -50,18 +50,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 							headers
 						});
 						const data = await response.json();
-
-						if (data.rides.length === 0) {
+						if (data.data.rides.length === 0) {
 							break;
 						}
 
-						total += data.rides
+						total += data.data.rides
 							.filter(({
 								latest_ride_status
 							}) => latest_ride_status !== 6 && latest_ride_status !== 7)
 							.map(({
-								price
-							}) => price)
+								final_price
+							}) => final_price)
 							.reduce((sum, price) => sum + price, 0);
 						page += 1;
 					} catch (err) {

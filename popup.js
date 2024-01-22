@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			(async () => {
 				const token = `Bearer ${accessToken}`;
 				const headers = new Headers();
-				const url = 'https://web-api.snapp.ir/api/v1/ride/history';
+				const url = 'https://app.snapp.taxi/api/api-base/v2/passenger/ride/history';
 				const query = '?page=';
 				let total = 0;
 				let page = 1;

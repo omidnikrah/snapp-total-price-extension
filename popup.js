@@ -2,15 +2,13 @@ String.prototype.toPersianDigits = function () {
 	const id = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 	return this.replace(/[0-9]/g, w => id[+w]);
 }
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const calculateElem = document.getElementById("calculate");
 	const loadingElem = document.getElementById("loading");
 	const totalElem = document.getElementById("total");
 	const descriptionElem = document.getElementById("description");
 	try {
-		const key = "accessToken";
-
-
 		const tabs = await chrome.tabs.query({
 			active: true,
 			currentWindow: true
@@ -18,11 +16,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 		const tab = tabs[0];
 
-		const fromPageLocalStore = await chrome.tabs.executeScript(tab.id, {
-			code: `localStorage['${key}']`
-		});
+		const data = await chrome.scripting.executeScript(
+			{
+				target: { tabId: tab.id },
+				func: () => {
+					return localStorage.getItem("accessToken")
+				},
+			}
+		)
 
-		const accessToken = fromPageLocalStore[0];
+		const accessToken = data[0].result;
 
 		calculateElem.addEventListener('click', () => {
 			calculateElem.disabled = true;
@@ -31,7 +34,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 			loadingElem.style.display = "block";
 			totalElem.style.display = "none";
 			descriptionElem.style.display = "none";
-
 			(async () => {
 				const token = `Bearer ${accessToken}`;
 				const headers = new Headers();
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			})();
 		})
 	} catch (err) {
+		console.log(err);
 		descriptionElem.style.color = "#ff3434";
 		descriptionElem.innerText = "خطایی رخ داد :( یادت باشه حتما باید تو سایت app.snapp.taxi باشی تا بتونی از من استفاده کنی";
 	}

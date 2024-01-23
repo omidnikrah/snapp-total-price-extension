@@ -1,16 +1,14 @@
 {
-	"manifest_version": 2,
-
+	"manifest_version": 3,
+  
 	"name": "Snapp Total",
 	"description": "Snapp Total pay",
-	"version": "1.0",
-
-	"browser_action": {
-		"default_icon": "icon.png",
-		"default_popup": "popup.html"
+	"version": "1.0.1",
+  
+	"action": {
+	  "default_icon": "icon.png",
+	  "default_popup": "popup.html"
 	},
-	"permissions": ["storage","activeTab"],
-	"background": {
-		"scripts": ["background.js"]
-	}
-}
+  
+	"permissions": ["activeTab", "scripting"]
+  }
